@@ -33,8 +33,8 @@ st.header('Grafik Harga Emas', divider='gray')
 # Slider untuk memilih rentang tahun
 tahun_awal, tahun_akhir = st.slider(
     'Pilih rentang tahun:',
-    min_value=2000, max_value=2023,  # Rentang tahun yang tersedia
-    value=(2015, 2023)  # Tahun default
+    min_value=2000, max_value=2024,  # Rentang tahun yang tersedia
+    value=(2015, 2024)  # Tahun default
 )
 
 # Memanggil fungsi tampil() dengan rentang tahun dari slider

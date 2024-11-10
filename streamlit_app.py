@@ -19,14 +19,14 @@ st.set_page_config(
 # Mendapatkan data XAUUSD
 def tampil():
     data = yf.Ticker("GC=F")
-    df = data.history(period="max") # Mengambil data selama 5 hari terakhir, misalnya
+    df = data.history(period="5d")  # Mengambil data selama 5 hari terakhir
     df = df['Close']
     return df  
 
 st.header('Grafik', divider='gray')
 
-''
-tampil()
-#st.line_chart(df)
+# Memanggil fungsi tampil untuk mendapatkan data
+df = tampil()
 
-''
+# Menampilkan grafik menggunakan Streamlit
+st.line_chart(df)

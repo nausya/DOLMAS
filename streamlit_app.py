@@ -19,7 +19,7 @@ st.set_page_config(
 # Mendapatkan data XAUUSD
 def tampil():
     data = yf.Ticker("GC=F")
-    df = data.history(period="5d")  # Mengambil data selama 5 hari terakhir
+    df = data.history(period="max")  # Mengambil data selama 5 hari terakhir
     df = df['Close']
     return df  
 

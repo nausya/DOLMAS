@@ -17,10 +17,6 @@ st.set_page_config(
 
 
 # Mendapatkan data XAUUSD
-# Fungsi untuk mengambil data harga emas berdasarkan tahun
-import yfinance as yf
-import streamlit as st
-import pandas as pd
 
 # Fungsi untuk mengambil data harga emas berdasarkan tahun dan kolom yang dipilih
 def tampil(tahun_awal, tahun_akhir, kolom):

@@ -17,15 +17,16 @@ st.set_page_config(
 
 
 # Mendapatkan data XAUUSD
-data = yf.Ticker("GC=F")
-df = data.history(period="max") # Mengambil data selama 5 hari terakhir, misalnya
-df = df['Close']
-df  
+def tampil():
+    data = yf.Ticker("GC=F")
+    df = data.history(period="max") # Mengambil data selama 5 hari terakhir, misalnya
+    df = df['Close']
+    return df  
 
 st.header('Grafik', divider='gray')
 
 ''
-
+tampil()
 #st.line_chart(df)
 
 ''

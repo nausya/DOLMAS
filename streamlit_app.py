@@ -19,13 +19,21 @@ st.set_page_config(
 # Mendapatkan data XAUUSD
 
 # Fungsi untuk mengambil data harga emas berdasarkan tahun dan kolom yang dipilih
-def tampil(tahun_awal, tahun_akhir, kolom):
+import yfinance as yf
+import streamlit as st
+import pandas as pd
+
+# Fungsi untuk mengambil data harga emas berdasarkan tahun dan kolom yang dipilih
+def tampil(tahun_awal, tahun_akhir, kolom_terpilih):
     data = yf.Ticker("GC=F")
     df = data.history(period="max")  # Mengambil seluruh data historis
     
     # Filter data berdasarkan tahun yang dipilih
     df = df[(df.index.year >= tahun_awal) & (df.index.year <= tahun_akhir)]
-    return df[[kolom]]  # Mengembalikan hanya kolom yang dipilih
+    
+    # Memastikan kolom yang dipilih tersedia di data
+    df = df[kolom_terpilih]  # Mengembalikan hanya kolom yang dipilih
+    return df
 
 # Judul halaman
 st.header('Grafik Harga Emas', divider='gray')
@@ -37,18 +45,23 @@ tahun_awal, tahun_akhir = st.slider(
     value=(2015, 2023)  # Tahun default
 )
 
-# Dropdown untuk memilih kolom data
-kolom = st.selectbox(
-    'Pilih jenis data:',
-    ('Open', 'High', 'Low', 'Close')
+# Multiselect untuk memilih beberapa kolom data
+kolom_terpilih = st.multiselect(
+    'Pilih jenis data yang ingin ditampilkan:',
+    options=['Open', 'High', 'Low', 'Close'],
+    default=['Close']  # Nilai default
 )
 
 # Memanggil fungsi tampil() dengan rentang tahun dan kolom yang dipilih
-df = tampil(tahun_awal, tahun_akhir, kolom)
-
-# Menampilkan grafik menggunakan Streamlit
-if not df.empty:
-    st.line_chart(df, y=kolom)
+if kolom_terpilih:
+    df = tampil(tahun_awal, tahun_akhir, kolom_terpilih)
+    
+    # Menampilkan grafik menggunakan Streamlit jika data tersedia
+    if not df.empty:
+        st.line_chart(df)
+    else:
+        st.write("Data tidak tersedia untuk rentang tahun yang dipilih.")
 else:
-    st.write("Data tidak tersedia untuk rentang tahun yang dipilih.")
+    st.write("Silakan pilih setidaknya satu kolom data untuk ditampilkan.")
+
 

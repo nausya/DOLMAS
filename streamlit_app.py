@@ -20,12 +20,12 @@ st.set_page_config(
 data = yf.Ticker("GC=F")
 df = data.history(period="max") # Mengambil data selama 5 hari terakhir, misalnya
 df = df['Close']
-    
+df  
 
 st.header('Grafik', divider='gray')
 
 ''
 
-st.line_chart(df)
+#st.line_chart(df)
 
 ''

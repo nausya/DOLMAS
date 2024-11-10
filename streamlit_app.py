@@ -23,7 +23,7 @@ def tampil():
     df = df['Close']
     return df  
 
-st.header('Grafik', divider='gray')
+st.header('Grafik Emas Terhadap Dollar', divider='gray')
 
 # Memanggil fungsi tampil untuk mendapatkan data
 df = tampil()
